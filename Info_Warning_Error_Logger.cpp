@@ -1,4 +1,4 @@
-#include "log/Info_Warning_Error_Logger.hpp"
+#include "Info_Warning_Error_Logger.hpp"
 
 
 std::shared_ptr<Info_Warning_Error_Logger> Info_Warning_Error_Logger::static_log = std::shared_ptr<Info_Warning_Error_Logger>(new Info_Warning_Error_Logger());
