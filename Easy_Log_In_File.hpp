@@ -25,9 +25,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #define EASY_LOG_IN_FILE_HPP
 
 
-#include <fstream>
-#include <cstdio>
-
 #include "Info_Warning_Error_Logger.hpp"
 #include "File_Handler.hpp"
 
@@ -46,10 +43,9 @@ class Easy_Log_In_File
     private:
         Easy_Log_In_File(const std::string& folderPath);
         Easy_Log_In_File(const Easy_Log_In_File& cpy);
-        ~Easy_Log_In_File();
         Easy_Log_In_File& operator = (const Easy_Log_In_File& noCpy);
 
-        static Easy_Log_In_File instance;
+        static std::shared_ptr<Easy_Log_In_File> instance;
 
         std::shared_ptr<Info_Warning_Error_Logger> infoLog;
         std::shared_ptr<Info_Warning_Error_Logger> warningLog;
@@ -58,8 +54,6 @@ class Easy_Log_In_File
         std::string infoPath;
         std::string warningPath;
         std::string errorPath;
-
-        void removeIfEmpty(const std::string& path);
 };
 
 

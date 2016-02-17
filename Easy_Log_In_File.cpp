@@ -1,23 +1,23 @@
 #include "Easy_Log_In_File.hpp"
 
 
-Easy_Log_In_File Easy_Log_In_File::instance = Easy_Log_In_File("logs/");
+std::shared_ptr<Easy_Log_In_File> Easy_Log_In_File::instance = std::shared_ptr<Easy_Log_In_File>(new Easy_Log_In_File("logs/"));
 
 Easy_Log_In_File& Easy_Log_In_File::getInstance()
-{return instance;}
+{return *instance;}
 
 std::shared_ptr<Info_Warning_Error_Logger> Easy_Log_In_File::getInfoLog()
-{return instance.infoLog;}
+{return instance->infoLog;}
 
 std::shared_ptr<Info_Warning_Error_Logger> Easy_Log_In_File::getWarningLog()
-{return instance.warningLog;}
+{return instance->warningLog;}
 
 std::shared_ptr<Info_Warning_Error_Logger> Easy_Log_In_File::getErrorLog()
-{return instance.errorLog;}
+{return instance->errorLog;}
 
 void Easy_Log_In_File::setFolderPath(const std::string& path)
 {
-    instance = Easy_Log_In_File(path);
+    instance = std::shared_ptr<Easy_Log_In_File>(new Easy_Log_In_File(path));
 }
 
 Easy_Log_In_File::Easy_Log_In_File(const std::string& folderPath) :
@@ -36,21 +36,5 @@ Easy_Log_In_File::Easy_Log_In_File(const std::string& folderPath) :
 Easy_Log_In_File::Easy_Log_In_File(const Easy_Log_In_File& cpy)
 {}
 
-Easy_Log_In_File::~Easy_Log_In_File()
-{
-    removeIfEmpty(infoPath);
-    removeIfEmpty(warningPath);
-    removeIfEmpty(errorPath);
-}
-
 Easy_Log_In_File& Easy_Log_In_File::operator = (const Easy_Log_In_File& noCpy)
-{return instance;}
-
-void Easy_Log_In_File::removeIfEmpty(const std::string& path)
-{
-    std::ifstream ifs(path.c_str(), std::ios::in|std::ios::binary);
-    auto cur = ifs.tellg();
-    ifs.seekg(0, std::ios_base::end);
-    if(ifs.tellg()==cur)
-        std::remove(path.c_str());
-}
+{return *instance;}

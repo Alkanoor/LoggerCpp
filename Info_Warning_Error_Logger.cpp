@@ -3,11 +3,26 @@
 
 std::shared_ptr<Info_Warning_Error_Logger> Info_Warning_Error_Logger::static_log = std::shared_ptr<Info_Warning_Error_Logger>(new Info_Warning_Error_Logger());
 
-Info_Warning_Error_Logger::Info_Warning_Error_Logger(bool date) :
+Info_Warning_Error_Logger::Info_Warning_Error_Logger(bool date, int type) :
     endLineAuto(true),
     printDateAuto(date),
-    currentType(0)
+    currentType(type)
 {}
+
+void Info_Warning_Error_Logger::setDateAuto(bool date)
+{
+    printDateAuto = date;
+}
+
+void Info_Warning_Error_Logger::setEndlineAuto(bool endline)
+{
+    endLineAuto = endline;
+}
+
+void Info_Warning_Error_Logger::setType(int type)
+{
+    currentType = type;
+}
 
 void Info_Warning_Error_Logger::setType(const std::string& type)
 {

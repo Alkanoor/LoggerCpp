@@ -34,9 +34,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 class Info_Warning_Error_Logger : public Logger
 {
     public:
-        Info_Warning_Error_Logger(bool date = true);
-
+        Info_Warning_Error_Logger(bool date = true, int type = -1);
+	
+	void setDateAuto(bool date = true);
+	void setEndlineAuto(bool endline = true);
+	void setType(int type = -1);
         void setType(const std::string& type);
+
         template <typename T>
         Info_Warning_Error_Logger& operator << (T args);
 
@@ -63,8 +67,9 @@ class Info_Warning_Error_Logger : public Logger
 template <typename T>
 Info_Warning_Error_Logger& Info_Warning_Error_Logger::operator << (T args)
 {
-    endLineAuto = false;
+    bool tempEndLineAuto = endLineAuto;
     bool temp = printDateAuto;
+    endLineAuto = false;
     printDateAuto = false;
     if(currentType==0)
         info(args);
@@ -74,7 +79,7 @@ Info_Warning_Error_Logger& Info_Warning_Error_Logger::operator << (T args)
         error(args);
     else
         write(args);
-    endLineAuto = true;
+    endLineAuto = tempEndLineAuto;
     printDateAuto = temp;
     return *this;
 }
