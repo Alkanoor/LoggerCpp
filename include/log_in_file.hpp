@@ -25,8 +25,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #define LOG_IN_FILE_HPP
 
 
-#include "info_warning_error_debug.hpp"
-#include "info_warning_error.hpp"
+#include "info_warning_error_logger_debug.hpp"
+#include "info_warning_error_logger.hpp"
 #include "file_handler.hpp"
 
 
@@ -64,7 +64,7 @@ typedef Log_In_File<Info_Warning_Error_Logger_Debug> Easy_Log_In_File_Debug;
 
 
 template <typename Logger_Type>
-std::shared_ptr<Log_In_File<Logger_Type> > Log_In_File::instance = std::shared_ptr<Log_In_File<Logger_Type> >(new Log_In_File<Logger_Type>("logs/"));
+std::shared_ptr<Log_In_File<Logger_Type> > Log_In_File<Logger_Type>::instance(new Log_In_File<Logger_Type>("logs/"));
 
 template <typename Logger_Type>
 Log_In_File<Logger_Type>& Log_In_File<Logger_Type>::getInstance()
@@ -86,7 +86,7 @@ template <typename Logger_Type>
 void Log_In_File<Logger_Type>::setFolderPath(const std::string& path)
 {
     if(path!=instance->path)
-        instance = std::shared_ptr<Log_In_File>(new Log_In_File(path));
+        instance.reset(new Log_In_File<Logger_Type>(path));
 }
 
 template <typename Logger_Type>
@@ -109,7 +109,7 @@ Log_In_File<Logger_Type>::Log_In_File(const Log_In_File& cpy)
 {}
 
 template <typename Logger_Type>
-Log_In_File& Log_In_File<Logger_Type>::operator = (const Log_In_File& noCpy)
+Log_In_File<Logger_Type>& Log_In_File<Logger_Type>::operator = (const Log_In_File<Logger_Type>& noCpy)
 {return *instance;}
 
 

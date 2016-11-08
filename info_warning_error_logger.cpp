@@ -1,7 +1,7 @@
-#include "include/debug_info_warning_error_logger.hpp"
+#include "include/info_warning_error_logger.hpp"
 
 
-std::shared_ptr<Debug_Info_Warning_Error_Logger> Debug_Info_Warning_Error_Logger::static_log = std::shared_ptr<Debug_Info_Warning_Error_Logger>(new Debug_Info_Warning_Error_Logger());
+std::shared_ptr<Info_Warning_Error_Logger> Info_Warning_Error_Logger::static_log = std::shared_ptr<Info_Warning_Error_Logger>(new Info_Warning_Error_Logger());
 
 Info_Warning_Error_Logger::Info_Warning_Error_Logger(bool date, int type) :
     endLineAuto(true),

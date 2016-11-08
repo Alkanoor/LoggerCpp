@@ -35,9 +35,9 @@ class Info_Warning_Error_Logger_Debug : public Info_Warning_Error_Logger
 
         void toggleDebug();
         void setDebug(bool debug);
-        void setWriteDebug(bool write_debug);
-        bool debug() const;
-        bool writeDebug() const;
+        void setWriteDebug(bool writeDebug);
+        bool isDebug() const;
+        bool isWriteDebug() const;
 
         template <typename T>
         Info_Warning_Error_Logger_Debug& operator << (T args);
@@ -50,6 +50,8 @@ class Info_Warning_Error_Logger_Debug : public Info_Warning_Error_Logger
         void warning(T... args);
         template <typename ... T>
         void error(T... args);
+        void printDate();
+        void endLine();
 
         static std::shared_ptr<Info_Warning_Error_Logger_Debug> static_log;
 
@@ -72,9 +74,9 @@ void Info_Warning_Error_Logger_Debug::write(T... args)
 {
     if(debug)
     {
-        if(write_debug)
+        if(writeDebug)
             for(std::vector<std::shared_ptr<Handler> >::iterator it = handlers.begin(); it != handlers.end(); it++)
-                (*it)->write("[DEBUG] ");
+                (*it)->write("|DEBUG| ");
         ((Info_Warning_Error_Logger*)this)->write(args ...);
     }
 }
@@ -84,9 +86,9 @@ void Info_Warning_Error_Logger_Debug::info(T... args)
 {
     if(debug)
     {
-        if(write_debug)
+        if(writeDebug)
             for(std::vector<std::shared_ptr<Handler> >::iterator it = handlers.begin(); it != handlers.end(); it++)
-                (*it)->write("[DEBUG] ");
+                (*it)->write("|DEBUG| ");
         ((Info_Warning_Error_Logger*)this)->info(args ...);
     }
 }
@@ -96,9 +98,9 @@ void Info_Warning_Error_Logger_Debug::warning(T... args)
 {
     if(debug)
     {
-        if(write_debug)
+        if(writeDebug)
             for(std::vector<std::shared_ptr<Handler> >::iterator it = handlers.begin(); it != handlers.end(); it++)
-                (*it)->write("[DEBUG] ");
+                (*it)->write("|DEBUG| ");
         ((Info_Warning_Error_Logger*)this)->warning(args ...);
     }
 }
@@ -108,9 +110,9 @@ void Info_Warning_Error_Logger_Debug::error(T... args)
 {
     if(debug)
     {
-        if(write_debug)
+        if(writeDebug)
             for(std::vector<std::shared_ptr<Handler> >::iterator it = handlers.begin(); it != handlers.end(); it++)
-                (*it)->write("[DEBUG] ");
+                (*it)->write("|DEBUG| ");
         ((Info_Warning_Error_Logger*)this)->error(args ...);
     }
 }
