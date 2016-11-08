@@ -2,7 +2,7 @@
 Copyright (C)
 
 creation date : 05/11/2015
-file : logger.hpp
+file : file_handler.hpp
 author : Julien Schoumacher
 
 This program is free software; you can redistribute it and/or modify
@@ -21,28 +21,29 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **/
 
 
-#ifndef LOGGER_HPP
-#define LOGGER_HPP
+#ifndef FILEHANDLER_HPP
+#define FILEHANDLER_HPP
 
 
-#include <memory>
-#include <vector>
+#include <fstream>
+#include <cstdio>
 
-#include "Handler.hpp"
+#include "handler.hpp"
 
 
-class Logger
+class File_Handler : public Handler
 {
     public:
-        Logger();
-        Logger(const std::vector<std::shared_ptr<Handler> >& handlers);
+        File_Handler(const std::string& path);
+        ~File_Handler();
 
-        void addHandler(const std::shared_ptr<Handler>& handler);
+        void write(const std::string& toWrite);
+        void writeEndline(const std::string& toWrite);
+        Handler& operator << (const std::string& toWrite);
 
-        static std::string date();
-
-    protected:
-        std::vector<std::shared_ptr<Handler> > handlers;
+    private:
+        std::ofstream file;
+	std::string path;
 };
 
 

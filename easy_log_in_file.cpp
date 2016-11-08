@@ -1,4 +1,4 @@
-#include "Easy_Log_In_File.hpp"
+#include "include/easy_log_in_file.hpp"
 
 
 std::shared_ptr<Easy_Log_In_File> Easy_Log_In_File::instance = std::shared_ptr<Easy_Log_In_File>(new Easy_Log_In_File("logs/"));

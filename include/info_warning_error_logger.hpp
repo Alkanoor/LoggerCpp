@@ -27,8 +27,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include <ctime>
 
-#include "String_Factory.hpp"
-#include "Logger.hpp"
+#include "string_factory.hpp"
+#include "logger.hpp"
 
 
 class Info_Warning_Error_Logger : public Logger

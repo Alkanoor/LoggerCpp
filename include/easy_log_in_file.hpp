@@ -2,7 +2,7 @@
 Copyright (C)
 
 creation date : 08/11/2015
-file : Easy_Log_In_File.hpp
+file : easy_log_in_file.hpp
 author : Julien Schoumacher
 
 This program is free software; you can redistribute it and/or modify
@@ -25,8 +25,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #define EASY_LOG_IN_FILE_HPP
 
 
-#include "Info_Warning_Error_Logger.hpp"
-#include "File_Handler.hpp"
+#include "info_warning_error_logger.hpp"
+#include "file_handler.hpp"
 
 
 class Easy_Log_In_File
